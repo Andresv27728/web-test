@@ -1,11 +1,14 @@
 import express from 'express'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
-import { Client, LocalAuth } from 'whatsapp-web.js'
 import qrcode from 'qrcode'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+
+// 👇 Importación compatible con CommonJS
+import pkg from 'whatsapp-web.js'
+const { Client, LocalAuth } = pkg
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app = express()
@@ -145,7 +148,7 @@ io.on('connection', (socket) => {
   })
 })
 
-// Descargar historial como archivo
+// Descargar historial
 app.get('/history/:id', (req, res) => {
   const file = path.join(HISTORY_DIR, `${req.params.id}.json`)
   if (fs.existsSync(file)) {
@@ -155,7 +158,7 @@ app.get('/history/:id', (req, res) => {
   }
 })
 
-// Ver historial en la tabla
+// Ver historial como JSON para la tabla
 app.get('/history-view/:id', (req, res) => {
   const file = path.join(HISTORY_DIR, `${req.params.id}.json`)
   if (fs.existsSync(file)) {
