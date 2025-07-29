@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>WhatsApp Cleaner</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+      background: #eef2f5;
+    }
+    #qr {
+      margin: 20px auto;
+      width: 300px;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    table {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 800px;
+    }
+    th, td {
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔧 WhatsApp Cleaner</h1>
+  <div id="qr">Cargando QR...</div>
+  <div id="controls" style="display:none;">
+    <button onclick="clearAll()">🧹 Limpiar todos los chats</button>
+    <button onclick="clearInactive()">🛌 Limpiar inactivos (8 días)</button>
+    <button onclick="clearGroups()">👥 Eliminar chats de grupos</button>
+    <button onclick="downloadHistory()">📥 Descargar historial (.json)</button>
+  </div>
+  <div id="status" style="margin-top: 10px;"></div>
+
+  <div id="counters" style="margin-top: 20px;">
+    <p><strong>🧾 Mensajes Totales:</strong> <span id="total">0</span></p>
+    <p><strong>🗑️ Eliminados:</strong> <span id="deleted">0</span></p>
+    <p><strong>🔧 Última acción:</strong> <span id="lastaction">Ninguna</span></p>
+  </div>
+
+  <h2>📊 Historial de limpieza</h2>
+  <table border="1" id="history-table">
+    <thead>
+      <tr>
+        <th>📅 Fecha</th>
+        <th>⚙️ Acción</th>
+        <th>📨 Mensajes Totales</th>
+        <th>🗑️ Eliminados</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
